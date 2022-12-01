@@ -11,15 +11,16 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 public class AWSClient {
-    AmazonS3 s3Client;
+    private AmazonS3 s3Client;
+    
     public AWSClient(AWSCredentialsProvider aWSRoleBaseCredentialsProvider) {
-        s3Client = AmazonS3ClientBuilder.standard()
+        this.s3Client = AmazonS3ClientBuilder.standard()
         .withCredentials(aWSRoleBaseCredentialsProvider)
         .withClientConfiguration(getClientConfig())
         .build();
     }
     public AWSClient() {
-        s3Client = AmazonS3ClientBuilder.standard().build();
+        this.s3Client = AmazonS3ClientBuilder.standard().build();
     }
     public static AWSClient getInstance() {
         return new AWSClient();
@@ -46,4 +47,8 @@ public class AWSClient {
             .withTcpKeepAlive(true);
         return clientConfiguration;
         }
+	
+	public AmazonS3 getS3Client() {
+		return this.s3Client;
+	}
 }

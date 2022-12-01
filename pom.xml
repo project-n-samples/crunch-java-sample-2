@@ -7,7 +7,7 @@
   <groupId>com.projectn.aws_java_test</groupId>
   <artifactId>aws_java_test</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>aws_java_test</name>
 
   <dependencyManagement>
