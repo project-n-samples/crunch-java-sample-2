@@ -5,40 +5,36 @@ import java.time.Duration;
 import com.projectn.awssdk.services.s3.BoltS3Client;
 
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
 import software.amazon.awssdk.core.retry.RetryPolicy;
 import software.amazon.awssdk.core.retry.RetryPolicyContext;
 import software.amazon.awssdk.core.retry.backoff.BackoffStrategy;
-import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3ClientBuilder;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
 public class BoltClient{
 
-    S3Client boltClient;
+    private S3Client boltClient;
 
     public BoltClient(){
-        boltClient = BoltS3Client.builder().build();
+        this.boltClient = BoltS3Client.builder().build();
     }
 
-    public BoltClient(AwsCredentialsProvider credentialsProvider){
-        boltClient = getBoltClientBuilder().credentialsProvider(credentialsProvider).build();
+	public BoltClient(AwsCredentialsProvider credentialsProvider){
+    	this.boltClient = getBoltClientBuilder().credentialsProvider(credentialsProvider).build();
     }
 
     public BoltClient(long delayBeforeNextRetry, int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
-        boltClient =  getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
+    	this.boltClient =  getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
         .build();
     }
 
     public BoltClient(AwsCredentialsProvider credentialsProvider, long delayBeforeNextRetry,
                         int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
 
-        boltClient =  getBoltClientBuilder(credentialsProvider, delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
+    	this.boltClient =  getBoltClientBuilder(credentialsProvider, delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
             .build();
     }
 
@@ -115,5 +111,11 @@ public class BoltClient{
         return getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
             .credentialsProvider(credentialsProvider);
     }
+    
+    public S3Client getBoltClient() {
+		return this.boltClient;
+	}
+
+	
 
 }
