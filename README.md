@@ -8,13 +8,11 @@ In the pom file we are temporarily referencing a local path. We will update this
 ## Pom File
 - Add referance to local projectn-bolt-aws-java-1.0.x.jar in pom file.
     ```xml
-    <dependency>
-      <groupId>com.projectn.awssdk.service.s3</groupId>
-      <artifactId>projectn-bolt-aws-java</artifactId>
-      <scope>system</scope>
-      <version>1.0.2</version>
-      <systemPath>${project.basedir}/projectn-bolt-aws-java-1.0.2.jar</systemPath>
-    </dependency>
+  <dependency>
+    <groupId>co.projectn</groupId>
+    <artifactId>bolt-java-sdk</artifactId>
+    <version>1.0.2</version>
+  </dependency>
     ```
 - Adding two version of AWS-JAVA-SDK
 ```xml
