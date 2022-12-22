@@ -1,5 +1,5 @@
 # bolt-java-sample-2
-AWSClient.java is similar to the singleton that you reference in your java objects in order to read from S3. In addition to this, you’ll find a  new singleton BoltClient.java (built on top of aws-sdk-java-2)that you can reference in your java objects to read from Bolt endpoint. Also included is App.java which shows an example of how a POJO can reference both Singletons. It first reads from Bolt and if that returns 404, it tries to read from S3.  I think most of your getObject calls to Lidar objects will look like this example.
+`AWSClient.java` is similar to the singleton that you reference in your java objects in order to read from S3. In addition to this, you’ll find another singleton `BoltClient.java` (built on top of aws-sdk-java-2)that you can reference in your java objects in order to read from Bolt endpoint. Also included is `App.java` which shows an example of how a POJO can reference both Singletons. It first reads from Bolt and if that returns 404, it tries to read from S3.  I think most of your `getObject` calls to Lidar objects will look similar to this example.
 
 
 ## Pom File
