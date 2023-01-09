@@ -53,10 +53,15 @@ public class App{
         boltClient = BoltClient.getInstance();
         awsClient = AWSClient.getInstance();
 
+        String bucket = System.getenv("BUCKET");
+        String key = System.getenv("OBJECT");
+
         System.out.println("******************* App Main *******************");
-        
+        System.out.println("Env variable ");
+        System.out.println(bucket);
+        System.out.println(key);
         AppCode app = new AppCode(boltClient, awsClient);
-        byte[] out = app.getObject("bolt-test-aqfk03", "testfile.json");
+        byte[] out = app.getObject(bucket, key);
         
         System.out.println(out.length);
     }

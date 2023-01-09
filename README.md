@@ -11,4 +11,18 @@ In addition to these examples, we have included an example file called `App.java
 We hope these examples will be a helpful resource for your projects. Thank you for using our sample code repo!
 
 
+# How to run this
+## Build the image
+`docker build -t <image-name> .`
 
+## ENV
+Create an environment file
+
+```
+BOLT_CUSTOM_DOMAIN=here-internal.bolt.projectn.co
+BUCKET=test-lidar-bucket
+OBJECT=test.ama
+```
+
+## Run the image with the env file
+`docker run --name <container-name> --env-file <env-file-name> <image-name>`

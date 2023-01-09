@@ -1,0 +1,3 @@
+BOLT_CUSTOM_DOMAIN=here-internal.bolt.projectn.co
+BUCKET=test-lidar-bucket
+OBJECT=test.ama
