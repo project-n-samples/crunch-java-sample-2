@@ -19,27 +19,16 @@ We hope these examples will be a helpful resource for your projects. Thank you f
 Create an environment file
 
 ```
-BOLT_CUSTOM_DOMAIN=here-internal.bolt.projectn.co
-BUCKET=test-lidar-bucket
-OBJECT=test.ama
+BOLT_CUSTOM_DOMAIN=our-internal.bolt.projectn.co
+BUCKET=test-bucket
+OBJECT=test-object.ama
 ```
 
-## Run the image with the env file
+## Run the image with above env file
 `docker run --name <container-name> --env-file <env-file-name> <image-name>`
 
-# Run from docker repo
-Have your CA file with name `letsencrypt_CA.pem` if you are not using let's encrypt 
-
-## ENV
-Create an environment file
+# If using a self-signed Certificate
 
 ```
-BOLT_CUSTOM_DOMAIN=here-internal.bolt.projectn.co
-BUCKET=test-lidar-bucket
-OBJECT=test.ama
+docker run -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main`
 ```
-
-## Run bellow command 
-`docker run -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main`
-
-`docker run -v $(pwd):/tmp --env-file env projectnsamples/bolt-java-sample-2:main`
