@@ -21,7 +21,7 @@ Create an environment file
 ```
 BOLT_CUSTOM_DOMAIN=our-internal.bolt.projectn.co
 BUCKET=test-bucket
-OBJECT=test-object.ama
+OBJECT=test-object.txt
 ```
 
 ## Run the image with above env file
