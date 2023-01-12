@@ -30,5 +30,5 @@ OBJECT=test-object.ama
 # If using a self-signed Certificate
 
 ```
-docker run -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main`
+docker run -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main
 ```
