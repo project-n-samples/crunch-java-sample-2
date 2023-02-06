@@ -12,25 +12,6 @@ We hope these examples will be a helpful resource for your projects. Thank you f
 
 
 # How to run this
-
-## Run the image with the env file
-`docker run --net=host --name <container-name> --env-file <env-file-name> <image-name>`
-
-# If using a self-signed Certificate
-
-```
-docker run -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main
-```
-
-## Run bellow command 
-`docker run --net=host -v <your-local-dir-with-the-CA>:/tmp --env-file <environment-file-name> projectnsamples/bolt-java-sample-2:main`
-
-`docker run --net=host -v $(pwd):/tmp --env-file env projectnsamples/bolt-java-sample-2:main`
-
-
-## Build the image
-`docker build -t <image-name> .`
-
 ## ENV
 Create an environment file
 
@@ -39,3 +20,7 @@ BOLT_CUSTOM_DOMAIN=our-internal.bolt.projectn.co
 BUCKET=test-bucket
 OBJECT=test-object.txt
 ```
+
+## Run the image with the env file
+`docker run --net=host --name <container-name> --env-file <env-file-name> projectnsamples/bolt-java-sample-2:main`
+
