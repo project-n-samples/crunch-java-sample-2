@@ -33,12 +33,17 @@ class AppCode {
             outData = response.asByteArray();
         } catch (S3Exception e) {
             statusCode = e.statusCode();
+            System.out.println(String.format("Error from bolt call, statuscode: %d", statusCode));
         }
+
         if (statusCode == 404){
             com.amazonaws.services.s3.model.GetObjectRequest request = new com.amazonaws.services.s3.model.GetObjectRequest(bucketName, key);
             S3Object s3Obj = awsClient.getS3Client().getObject(request);
             try {
                 s3Obj.getObjectContent().read(outData);
+            } catch (S3Exception e) {
+                System.out.println(String.format("Error from S3 call, statuscode: %d", statusCode));
+                statusCode = e.statusCode();
             } catch (IOException e) {
                 e.printStackTrace();
             }
