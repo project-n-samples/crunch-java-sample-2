@@ -12,10 +12,10 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 
 
 class AppCode {
-    private BoltClient boltS3Client; // AWS-Java-sdk 2.18.16 client
+    private GranicaClient boltS3Client; // AWS-Java-sdk 2.18.16 client
     private AWSClient awsClient;
 
-    public AppCode(BoltClient boltS3Client, AWSClient aWSClient) {
+    public AppCode(GranicaClient boltS3Client, AWSClient aWSClient) {
         this.boltS3Client = boltS3Client;
         this.awsClient = aWSClient;
     }
@@ -34,6 +34,8 @@ class AppCode {
         } catch (S3Exception e) {
             statusCode = e.statusCode();
             System.out.println(String.format("Error from bolt call, statuscode: %d", statusCode));
+        } catch (Exception e){
+            this.boltS3Client = GranicaClient.refresh();
         }
 
         if (statusCode == 404){
@@ -52,10 +54,10 @@ class AppCode {
     }
 }
 public class App{
-    static BoltClient boltClient;
+    static GranicaClient boltClient;
     static AWSClient awsClient;
     public static void main(String[] args) {
-        boltClient = BoltClient.getInstance();
+        boltClient = GranicaClient.getInstance();
         awsClient = AWSClient.getInstance();
 
         String bucket = System.getenv("BUCKET");
