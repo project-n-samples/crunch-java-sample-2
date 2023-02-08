@@ -34,6 +34,8 @@ class AppCode {
         } catch (S3Exception e) {
             statusCode = e.statusCode();
             System.out.println(String.format("Error from bolt call, statuscode: %d", statusCode));
+        } catch (Exception e){
+            this.boltS3Client = BoltClient.refresh();
         }
 
         if (statusCode == 404){

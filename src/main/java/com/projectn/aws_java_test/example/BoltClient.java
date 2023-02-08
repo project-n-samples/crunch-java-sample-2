@@ -16,31 +16,45 @@ import software.amazon.awssdk.services.s3.S3ClientBuilder;
 
 public class BoltClient{
 
-    private S3Client boltClient;
+    private static BoltClient boltClientInstance = null;
+    private static S3Client boltClient;
+    private static final Object lock = new Object();
 
-    public BoltClient(){
-        this.boltClient = BoltS3Client.builder().build();
+    private BoltClient(){
+        synchronized (BoltClient.class) {
+            boltClient = BoltS3Client.builder().build();
+          }
     }
 
-	public BoltClient(AwsCredentialsProvider credentialsProvider){
-    	this.boltClient = getBoltClientBuilder().credentialsProvider(credentialsProvider).build();
+	private BoltClient(AwsCredentialsProvider credentialsProvider){
+    	boltClient = getBoltClientBuilder().credentialsProvider(credentialsProvider).build();
     }
 
-    public BoltClient(long delayBeforeNextRetry, int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
-    	this.boltClient =  getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
+    private BoltClient(long delayBeforeNextRetry, int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
+    	boltClient =  getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
         .build();
     }
 
-    public BoltClient(AwsCredentialsProvider credentialsProvider, long delayBeforeNextRetry,
+    private BoltClient(AwsCredentialsProvider credentialsProvider, long delayBeforeNextRetry,
                         int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
 
-    	this.boltClient =  getBoltClientBuilder(credentialsProvider, delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
+    	boltClient =  getBoltClientBuilder(credentialsProvider, delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
             .build();
     }
 
     public static BoltClient getInstance() {
-        // We can replace this constructor with other BoltClient constructor default values
-        return new BoltClient();
+        if (boltClientInstance == null) {
+          synchronized (lock) {
+            if (boltClientInstance == null) {
+                boltClientInstance = new BoltClient();
+            }
+          }
+        }
+        return boltClientInstance;
+    }
+    public static BoltClient refresh(){
+        boltClientInstance = null;
+        return getInstance();
     }
 
     public static SdkHttpClient getSdkHttpClientWithConfig(int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
