@@ -10,6 +10,8 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>aws_java_test</name>
 
+
+
   <dependencyManagement>
     <dependencies>
         <dependency>
@@ -28,6 +30,17 @@
         </dependency>
     </dependencies>
   </dependencyManagement>
+  
+    <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <dependencies>
     <dependency>
@@ -39,9 +52,9 @@
       <artifactId>s3</artifactId>
     </dependency>
     <dependency>
-      <groupId>co.projectn</groupId>
-      <artifactId>bolt-java-sdk</artifactId>
-      <version>1.0.2</version>
+  	  <groupId>ai.granica</groupId>
+      <artifactId>granica-java-sdk</artifactId>
+      <version>1.0.4</version>
     </dependency>
   </dependencies>
 
