@@ -2,7 +2,7 @@ package com.projectn.aws_java_test.example;
 
 import java.time.Duration;
 
-import com.projectn.awssdk.services.s3.BoltS3Client;
+import ai.granica.awssdk.services.s3.GranicaS3Client;
 
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
@@ -14,45 +14,47 @@ import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.S3ClientBuilder;
 
-public class BoltClient{
-
-    private static BoltClient boltClientInstance = null;
+public class GranicaClient{
+    private static GranicaClient boltClientInstance = null;
     private static S3Client boltClient;
     private static final Object lock = new Object();
 
-    private BoltClient(){
-        synchronized (BoltClient.class) {
-            boltClient = BoltS3Client.builder().build();
+    private GranicaClient(){
+        synchronized (GranicaClient.class) {
+            boltClient = GranicaS3Client.builder().build();
           }
     }
 
-	private BoltClient(AwsCredentialsProvider credentialsProvider){
+	private GranicaClient(AwsCredentialsProvider credentialsProvider){
     	boltClient = getBoltClientBuilder().credentialsProvider(credentialsProvider).build();
     }
 
-    private BoltClient(long delayBeforeNextRetry, int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
+    private GranicaClient(long delayBeforeNextRetry, int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
     	boltClient =  getBoltClientBuilder(delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
         .build();
     }
 
-    private BoltClient(AwsCredentialsProvider credentialsProvider, long delayBeforeNextRetry,
+
+    private GranicaClient(AwsCredentialsProvider credentialsProvider, long delayBeforeNextRetry,
                         int maxConnections, Long socketTimeout, Boolean tcpKeepAlive){
 
     	boltClient =  getBoltClientBuilder(credentialsProvider, delayBeforeNextRetry, maxConnections, socketTimeout, tcpKeepAlive)
             .build();
     }
 
-    public static BoltClient getInstance() {
+
+    public static GranicaClient getInstance() {
         if (boltClientInstance == null) {
           synchronized (lock) {
             if (boltClientInstance == null) {
-                boltClientInstance = new BoltClient();
+                boltClientInstance = new GranicaClient();
             }
           }
         }
         return boltClientInstance;
     }
-    public static BoltClient refresh(){
+
+    public static GranicaClient refresh(){
         boltClientInstance = null;
         return getInstance();
     }
@@ -80,7 +82,7 @@ public class BoltClient{
      * @return S3ClientBuilder
      */
     public static S3ClientBuilder getBoltClientBuilder(){
-        return BoltS3Client.builder();
+        return GranicaS3Client.builder();
     }
 
     /**
@@ -106,7 +108,7 @@ public class BoltClient{
 
         SdkHttpClient httpClient = getSdkHttpClientWithConfig(maxConnections, socketTimeout, tcpKeepAlive);
 
-        return BoltS3Client.builder()
+        return GranicaS3Client.builder()
                 .overrideConfiguration(clientOverrideConfiguration)
                 .httpClient(httpClient);
     }
@@ -127,7 +129,7 @@ public class BoltClient{
     }
     
     public S3Client getBoltClient() {
-		return this.boltClient;
+		return boltClient;
 	}
 
 	
