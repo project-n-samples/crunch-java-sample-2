@@ -29,7 +29,7 @@ class AppCode {
                 .key(key)
                 .build();
             ResponseBytes<software.amazon.awssdk.services.s3.model.GetObjectResponse> response =
-            this.boltS3Client.getBoltClient().getObject(getObjectRequest, ResponseTransformer.toBytes());
+            this.boltS3Client.getGranicaClient().getObject(getObjectRequest, ResponseTransformer.toBytes());
             outData = response.asByteArray();
         } catch (S3Exception e) {
             statusCode = e.statusCode();
