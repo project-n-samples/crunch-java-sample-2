@@ -22,5 +22,5 @@ OBJECT=test-object.txt
 ```
 
 ## Run the image with the env file
-`docker run --net=host --name <container-name> --env-file <env-file-name> projectnsamples/crunch-java-sample-2:main`
+`docker run --net=host --name <container-name> --env-file <env-file-name> projectnsamples/crunch-java-sample-2:latest`
 
